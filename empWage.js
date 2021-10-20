@@ -23,6 +23,7 @@ const NUM_OF_WORKING_DAYS = 20;
 let totalEmpHrs = 0;
 let totalWorkingDays = 0;
 let empDailyWageArr = new Array();
+let empDailyWageMap = new Map();
 
 while (totalEmpHrs <= MAX_HRS_IN_MONTH && 
     totalWorkingDays < NUM_OF_WORKING_DAYS) {
@@ -31,13 +32,14 @@ while (totalEmpHrs <= MAX_HRS_IN_MONTH &&
         let empHrs = getWorkingHours(empCheck);
         totalEmpHrs += empHrs;
         empDailyWageArr.push(calcDailyWage(empHrs));
+        empDailyWageMap.set(totalWorkingDays, calcDailyWage(empHrs));
     }
 
     let empWage = calcDailyWage(totalEmpHrs);
     console.log("Total Days: " + totalWorkingDays +" Total Hrs: "+ totalEmpHrs + " Emp Wage: "+ empWage);
 
 
-// Array Helper Function
+/* // Array Helper Function
 //UC 7A - Calculate total Wage using Array forEach traversal or reduce method
 
 let totEmpWage = 0;
@@ -95,3 +97,13 @@ function totalDaysWorked(numOfDays, dailyWage){
     return numOfDays;
 }
 console.log("Number of Days Emp Worked: "+ empDailyWageArr.reduce(totalDaysWorked, 0));
+ */
+
+
+
+console.log(empDailyWageMap);
+function totalWages(totalWage, dailyWage){
+    return totalWage + dailyWage;
+}
+
+console.log("Emp Wage Map totalHrs: "+Array.from(empDailyWageMap.values()).reduce(totalWages, 0));
